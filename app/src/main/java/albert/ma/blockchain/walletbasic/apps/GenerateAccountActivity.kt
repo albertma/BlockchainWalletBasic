@@ -2,6 +2,8 @@ package albert.ma.blockchain.walletbasic.apps
 
 
 import albert.ma.blockchain.walletbasic.R
+import albert.ma.blockchain.walletbasic.bip39.MnemonicWordNumber
+import albert.ma.blockchain.walletbasic.utils.WalletUtils
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -49,7 +51,7 @@ class GenerateMnemonicActivity: ComponentActivity() {
 
 @Composable
 fun NewMnemonicScreen() {
-    val mnemonicWords = listOf("apple", "banana", "cat", "dog", "elephant", "fish", "grape", "house", "ice", "jungle", "kite", "lion")
+    val mnemonicWords =  WalletUtils.createMnemonicWords(MnemonicWordNumber.TWELVE)
 
     Column(
             modifier = Modifier

@@ -26,7 +26,7 @@ class WalletUtils {
 
         private fun createWalletInner(mnemonicWords: List<String>, password: String){
             val seed:ByteArray = MnemonicCode.toSeed(mnemonicWords, "")
-            val extendedKey:ExtendedKey = ExtendedKey.create(seed)
+           // val extendedKey:ExtendedKey = ExtendedKey.create(seed)
         }
     }
 

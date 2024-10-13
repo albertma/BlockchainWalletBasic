@@ -38,7 +38,7 @@ class ExtendedKey {
             if(m >= Curve.n){
                 return null
             }
-            val keyPair: KeyPair = KeyPair(l, true)
+           // val keyPair: KeyPair = KeyPair(l, true)
 
             return null
         }
