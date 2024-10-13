@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">BlockchainWalletBasic</string>
+    <string name="app_name">Blockchain Wallet Basic</string>
+    <string name="features">Features</string>
+    <string name="mnemonics">Mnemonics</string>
+    <string name="accounts" >Accounts</string>
+    <string name="backup_your_mnemonic">Backup Your Mnemonic</string>
+    <string name="backup_mnemonic_tips">Please write down your mnemonic, and keep it carefully. This is the only way to recover your wallet.</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">区块链钱包基础版</string>
+    <string name="features">功能</string>
+    <string name="mnemonics">助记词</string>
+    <string name="accounts">钱包账户</string>
+    <string name="backup_your_mnemonic">备份你的助记词</string>
+    <string name="backup_mnemonic_tips">请写下你的助记词，请妥善保管，你只能用这些助记词来恢复你的钱包。</string>
+</resources>
