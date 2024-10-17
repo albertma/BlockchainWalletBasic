@@ -1,13 +1,15 @@
 package albert.ma.blockchain.walletbasic.bip39
 
 import albert.ma.blockchain.walletbasic.utils.Hash
-import androidx.collection.emptyLongSet
+import kotlin.experimental.or
+
 
 class MnemonicCode {
 
-    private var wordList: WordList = English.INSTANCE
 
+    var wordList: WordList = English.INSTANCE
     companion object{
+
         private const val PBKDF2_ROUNDS: Int = 2048
         fun toSeed(words: List<String>, passphase:String):ByteArray{
             val builder = StringBuilder()
@@ -66,9 +68,62 @@ class MnemonicCode {
                     index = index or 0x1
                 }
             }
-            words.add(this.wordList.getWord(index))
+            words.add(wordList.getWord(index))
         }
 
         return words
+    }
+
+    @Throws(RuntimeException::class)
+    fun toEntropy(words: List<String>): ByteArray {
+        if (words.size % 3 > 0) {
+            throw RuntimeException("Word list size must be multiple of three words.")
+        }
+
+        if (words.isEmpty()) {
+            throw RuntimeException("Word list is empty.")
+        }
+
+        // 构建原始 entropy 和校验和的连接
+        val concatLenBits = words.size * 11
+        val concatBits = BooleanArray(concatLenBits)
+        for ((wordIndex, word) in words.withIndex()) {
+            // 查找单词在 wordlist 中的索引
+            val ndx = this.wordList.getIndex(word)
+            if (ndx < 0) {
+                throw RuntimeException(word)
+            }
+
+            // 设置下一个 11 位为索引的值
+            for (ii in 0 until 11) {
+                concatBits[(wordIndex * 11) + ii] = (ndx and (1 shl (10 - ii))) != 0
+            }
+        }
+
+        val checksumLengthBits = concatLenBits / 33
+        val entropyLengthBits = concatLenBits - checksumLengthBits
+
+        // 提取原始 entropy 作为字节
+        val entropy = ByteArray(entropyLengthBits / 8)
+        for (ii in entropy.indices) {
+            for (jj in 0 until 8) {
+                if (concatBits[(ii * 8) + jj]) {
+                    entropy[ii] = entropy[ii] or (1 shl (7 - jj)).toByte()
+                }
+            }
+        }
+
+        // 对 entropy 进行哈希
+        val hash = Hash.sha256(entropy)
+        val hashBits = bytesToBits(hash)
+
+        // 校验校验和
+        for (i in 0 until checksumLengthBits) {
+            if (concatBits[entropyLengthBits + i] != hashBits[i]) {
+                throw RuntimeException()
+            }
+        }
+
+        return entropy
     }
 }

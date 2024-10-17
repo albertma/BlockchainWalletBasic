@@ -26,6 +26,16 @@
         <activity android:name=".apps.GenerateMnemonicActivity">
 
         </activity>
+        <activity android:name=".apps.CreateWalletDialogActivity"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity android:name=".apps.CreateWalletMnemonicsActivity">
+
+        </activity>
+        <activity android:name=".apps.ConfirmMnemonicActivity" >
+
+        </activity>
     </application>
 
 </manifest>

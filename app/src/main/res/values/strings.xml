@@ -4,5 +4,12 @@
     <string name="mnemonics">Mnemonics</string>
     <string name="accounts" >Accounts</string>
     <string name="backup_your_mnemonic">Backup Your Mnemonic</string>
-    <string name="backup_mnemonic_tips">Please write down your mnemonic, and keep it carefully. This is the only way to recover your wallet.</string>
+    <string name="backup_mnemonic_tips">Please write down your mnemonic, and keep it carefully. This is the only way to recover your wallet. Next step you will confirm mnemonic words.</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+    <string name="wallet_new">New Wallet</string>
+    <string name="create_wallet_title">Input name and password to create wallet</string>
+    <string name="input_wallet_name">Input wallet name, only numbers or letters</string>
+    <string name="input_wallet_password">Input wallet password, only numbers or letters</string>
+    <string name="cancel">Cancel</string>
 </resources>

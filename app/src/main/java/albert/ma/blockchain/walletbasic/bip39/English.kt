@@ -4,7 +4,7 @@ class English : WordList {
     companion object{
         val INSTANCE = English()
     }
-    private val words = arrayOf(
+    val words = arrayOf(
 
             "abandon",
             "ability",

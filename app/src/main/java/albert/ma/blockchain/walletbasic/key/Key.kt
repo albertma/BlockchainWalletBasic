@@ -26,7 +26,7 @@ interface Key {
 
     //Get 0x address string
     fun getAddress():String
-    fun isCompressed():Boolean
-    fun <T>sign(messageHash: ByteArray):T
+
+    fun sign(messageHash: ByteArray):ByteArray
 
 }

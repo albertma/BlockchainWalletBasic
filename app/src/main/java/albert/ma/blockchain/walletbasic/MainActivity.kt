@@ -1,5 +1,6 @@
 package albert.ma.blockchain.walletbasic
 
+import albert.ma.blockchain.walletbasic.apps.CreateWalletDialogActivity
 import albert.ma.blockchain.walletbasic.apps.GenerateMnemonicActivity
 import albert.ma.blockchain.walletbasic.ui.BottomNavigationBar
 import albert.ma.blockchain.walletbasic.ui.theme.BlockchainWalletBasicTheme
@@ -72,9 +73,9 @@ data class GridButtonRes(@IntegerRes val resourceId: Int, val name: String, val 
 
 enum class FeatureId(val id:Int){
     MNEMONICS(0x0000001),
-
-
+    NEW_WALLET(0x0000002),
 }
+
 @Composable
 fun DrawerContent() {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
@@ -92,6 +93,7 @@ fun MyApp(modifier: Modifier = Modifier) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     var selectedTabIndex by remember { mutableStateOf(0) }
+
 
     ModalNavigationDrawer(
             drawerState = drawerState,
@@ -134,11 +136,14 @@ fun MyApp(modifier: Modifier = Modifier) {
 }
 
 
-
 fun handleClickGridButton(context: Context, id:Int){
     when(id){
         FeatureId.MNEMONICS.id -> {
             val intent = Intent(context, GenerateMnemonicActivity::class.java)
+            context.startActivity(intent)
+        }
+        FeatureId.NEW_WALLET.id -> {
+            val intent = Intent(context, CreateWalletDialogActivity::class.java)
             context.startActivity(intent)
         }
         else ->{
@@ -146,6 +151,7 @@ fun handleClickGridButton(context: Context, id:Int){
         }
     }
 }
+
 
 @Composable
 fun MyGridButton(
@@ -181,19 +187,21 @@ fun MyGridButton(
 @Preview
 @Composable
 fun Home(){
+
     BlockchainWalletBasicTheme {
         val icons = listOf(
-            R.drawable.mnemonics, R.drawable.mnemonics,
+            R.drawable.mnemonics, R.drawable.wallet,
             R.drawable.mnemonics, R.drawable.mnemonics,
             R.drawable.mnemonics, R.drawable.mnemonics,
             R.drawable.mnemonics, R.drawable.mnemonics
         )
         val labels = listOf(
-                stringResource(R.string.mnemonics), "Button 2", "Button 3", "Button 4",
+                stringResource(R.string.mnemonics), stringResource(R.string.wallet_new),
+                "Button 3", "Button 4",
                 "Button 5", "Button 6", "Button 7", "Button 8"
         )
         val ids = listOf(
-                FeatureId.MNEMONICS.id,FeatureId.MNEMONICS.id,
+                FeatureId.MNEMONICS.id, FeatureId.NEW_WALLET.id,
                 FeatureId.MNEMONICS.id,FeatureId.MNEMONICS.id,
                 FeatureId.MNEMONICS.id,FeatureId.MNEMONICS.id,
                 FeatureId.MNEMONICS.id,FeatureId.MNEMONICS.id,
@@ -203,6 +211,7 @@ fun Home(){
             gridBtnList.add(GridButtonRes(icons[i], labels[i], ids[i]))
         }
         MyGridScreen(gridBtnList)
+
     }
 }
 

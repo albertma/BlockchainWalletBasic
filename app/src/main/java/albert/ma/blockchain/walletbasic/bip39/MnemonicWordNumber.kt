@@ -10,4 +10,9 @@ enum class MnemonicWordNumber(val bitLength: Int) {
     EIGHTEEN(192),
     TWENTY_ONE(224),
     TWENTY_FOUR(256),
+    ;
+
+    fun byteLength():Int{
+        return bitLength/8
+    }
 }

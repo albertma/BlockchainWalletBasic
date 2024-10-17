@@ -9,8 +9,8 @@ class SecureRandomSeed {
             return random(mnemonicWordNumber, SecureRandom())
         }
 
-        fun random(mnemonicWordNumber: MnemonicWordNumber, random: Random):ByteArray{
-            val randomSeed = ByteArray(mnemonicWordNumber.bitLength)
+        private fun random(mnemonicWordNumber: MnemonicWordNumber, random: Random):ByteArray{
+            val randomSeed = ByteArray(mnemonicWordNumber.byteLength())
             random.nextBytes(randomSeed)
             return randomSeed
         }
